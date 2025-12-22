@@ -5,6 +5,7 @@ task decorator.
 """
 from functools import wraps
 from task_engine.core.registry import Registry
+from task_engine.enums.task_status import TaskStatus
 
 class Task:
 
@@ -16,6 +17,7 @@ class Task:
         self.function_args = {}
         self.function_kwargs = {}
         self.executed = False
+        self.state = TaskStatus.PENDING # Default state
 
     def __call__(self, original_function):
 
