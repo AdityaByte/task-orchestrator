@@ -1,7 +1,7 @@
 from task_engine.core.registry import Registry
 from task_engine.core.task import Task
 from task_engine.enums.task_status import TaskStatus
-from task_engine.exception.task_failed_exception import TaskFailedException
+from task_engine.exception.task_failed_error import TaskFailedError
 from datetime import datetime
 from time import time
 
@@ -27,7 +27,7 @@ class TaskExecutor:
         for dep in task.depends_on:
             try:
                 cls._execute_helper(Registry.get_task()[dep])
-            except TaskFailedException as e:
+            except TaskFailedError as e:
                 print("ERROR:", e)
 
         if any(Registry.get_task()[dep].state in [TaskStatus.FAILED, TaskStatus.SKIPPED] for dep in task.depends_on):
@@ -45,4 +45,4 @@ class TaskExecutor:
             task.state = TaskStatus.FAILED
             task.end_time = datetime.now().strftime("%#I:%M:%S %p")
             task.error = e
-            raise TaskFailedException(f"task: {task.name} failed by {e}")
+            raise TaskFailedError(f"task: {task.name} failed by {e}")
