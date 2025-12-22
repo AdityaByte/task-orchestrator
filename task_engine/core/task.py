@@ -18,6 +18,10 @@ class Task:
         self.function_kwargs = {}
         self.executed = False
         self.state = TaskStatus.PENDING # Default state
+        self.start_time = ""
+        self.end_time = ""
+        self.duration = None
+        self.error = ""
 
     def __call__(self, original_function):
 
