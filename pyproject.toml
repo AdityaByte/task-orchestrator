@@ -1,0 +1,21 @@
+[project]
+name = "task-orchestrator"
+version = "0.1.0"
+description = "A lightweight Python task orchestration library for executing dependency-based workflows using a synchronous DAG executor"
+readme = "README.md"
+requires-python = ">=3.7"
+
+authors = [
+  { name = "Aditya Pawar" }
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
