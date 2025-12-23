@@ -14,8 +14,6 @@ class Task:
         self.depends_on = depends_on or []
         self.retries = retries
         self.function_ref = None
-        self.function_args = {}
-        self.function_kwargs = {}
         self.executed = False
         self.state = TaskStatus.PENDING # Default state
         self.start_time = ""
@@ -32,9 +30,8 @@ class Task:
 
         @wraps(original_function)
         def wrapper(*args, **kwargs):
+            print(f"Wrapper run by this function: {original_function.__name__}")
             # Since i have to keep save the args and keyword args too.
-            self.function_args = args
-            self.function_kwargs = kwargs
             return original_function(*args, **kwargs)
 
         return wrapper
