@@ -12,7 +12,7 @@ def test_task_defaults_when_optional_args_not_provided():
     task = Task(name="demo_task")
     assert task.depends_on == []
     assert task.state == TaskStatus.PENDING
-    assert task.error == ""
+    assert task.error is None
     assert task.start_time == ""
     assert task.end_time == ""
     assert task.duration is None

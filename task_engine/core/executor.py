@@ -3,8 +3,11 @@ from task_engine.core.task import Task
 from task_engine.enums.task_status import TaskStatus
 from task_engine.exception.task_failed_error import TaskFailedError
 from task_engine.validation.dag import DAGValidator
+from task_engine.context.condition.context import ConditionContext
 from datetime import datetime
 from time import time
+import os
+from task_engine.core.task import ErrorInformation
 
 class TaskExecutor:
     """
@@ -37,13 +40,23 @@ class TaskExecutor:
                 task.state = TaskStatus.SKIPPED
                 return
 
+            # Checking for condition if any condition exists and the result of that condition
+            # concluded to false then we skip that case.
+            if not cls._evaluate_condition(task):
+                task.state = TaskStatus.SKIPPED
+                return
+
             # Preparing inputs for dependency outputs.
             inputs = [cls.ExecutionContext.get(dep_name) for dep_name in task.depends_on]
 
             # Executing task
-            t1 = time()
-            task.start_time = datetime.now().strftime("%#I:%M:%S %p")
-            output = task.function_ref(*inputs)
+            try:
+                t1 = time()
+                task.start_time = datetime.now().strftime("%#I:%M:%S %p")
+                output = task.function_ref(*inputs)
+            except TypeError:
+                output = task.function_ref()
+
             if output is not None:
                 cls.ExecutionContext[task.name] = output
             task.end_time = datetime.now().strftime("%#I:%M:%S %p")
@@ -53,5 +66,19 @@ class TaskExecutor:
         except Exception as e:
             task.state = TaskStatus.FAILED
             task.end_time = datetime.now().strftime("%#I:%M:%S %p")
-            task.error = e
-            raise TaskFailedError(f"task: {task.name} failed by {e}")
+            task.error = ErrorInformation(e)
+
+
+    @classmethod
+    def _evaluate_condition(cls, task: Task):
+        if task.condition is None:
+            return True
+
+        ctx = ConditionContext(
+            env=os.environ,
+            task_states={name: t.state for name, t in Registry.get_task().items()},
+            execution_context=cls.ExecutionContext,
+            task_errors={name: t.error for name, t in Registry.get_task().items()}
+        )
+
+        return bool(task.condition(ctx))
