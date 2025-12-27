@@ -82,3 +82,29 @@ class TaskExecutor:
         )
 
         return bool(task.condition(ctx))
+
+
+    @classmethod
+    def dryrun(cls):
+
+        visited_task = set()
+        tasks = Registry.get_task()
+        for task in tasks:
+            cls._dryrun_helper(task, visited_task)
+
+    @classmethod
+    def _dryrun_helper(cls, task: Task, order_list: list, visited_task: set):
+        order_list = []
+        if any(task.name for task in visited_task):
+            return
+        visited_task.add(task.name)
+        order_list.append(task.name)
+        for dep_name in task.depends_on:
+            pass
+
+"""
+task4, task1 -> task2->task3
+
+-> Processed tasks - set()
+-> list of string.
+"""
