@@ -1,13 +1,13 @@
 from task_engine.core.registry import Registry
 from task_engine.core.task import Task
 from task_engine.enums.task_status import TaskStatus
-from task_engine.exception.task_failed_error import TaskFailedError
 from task_engine.validation.dag import DAGValidator
 from task_engine.context.condition.context import ConditionContext
 from datetime import datetime
 from time import time, sleep
 import os
 from task_engine.core.task import ErrorInformation
+from task_engine.utils.utilities import sort_task_on_the_basis_of_priority
 
 class TaskExecutor:
     """
@@ -21,7 +21,11 @@ class TaskExecutor:
         tasks = Registry.get_task()
         DAGValidator.validate(tasks)
 
-        for task in tasks.values():
+        # Sorting tasks on the basis of priority.
+        tasks = sort_task_on_the_basis_of_priority(tasks.values())
+
+        # The above sorted funs directly sending the list of values.
+        for task in tasks:
             cls._execute_helper(task)
 
 

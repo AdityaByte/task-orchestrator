@@ -7,10 +7,11 @@ from functools import wraps
 from task_engine.core.registry import Registry
 from task_engine.enums.task_status import TaskStatus
 from task_engine.retry.policy import RetryPolicy
+from task_engine.enums.task_priority import TaskPriority
 
 class Task:
 
-    def __init__(self, name, depends_on=None, retries: RetryPolicy=None, condition=None):
+    def __init__(self, name, depends_on=None, retries: RetryPolicy=None, condition=None, priority=TaskPriority.NORMAL):
         self.name = name
         self.depends_on = depends_on or []
         self.retries = retries
@@ -24,6 +25,7 @@ class Task:
         if condition is not None and not callable(condition):
             raise TypeError("Condition must be callable.")
         self.condition = condition
+        self.priority = priority
 
     def __call__(self, original_function):
 
