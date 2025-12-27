@@ -7,25 +7,29 @@ from datetime import datetime
 from time import time, sleep
 import os
 from task_engine.core.task import ErrorInformation
-from task_engine.utils.utilities import sort_task_on_the_basis_of_priority
+from task_engine.utils.utilities import sort_task_on_the_basis_of_priority, filter_tasks_on_the_basis_of_tags
 
 class TaskExecutor:
     """
     Don't need any instance for calling this method.
     """
     ExecutionContext: dict = {}
-
+    tasks: dict = {}
 
     @classmethod
-    def execute(cls):
-        tasks = Registry.get_task()
-        DAGValidator.validate(tasks)
+    def execute(cls, tags: tuple = ()):
+        cls.tasks = Registry.get_task()
+        DAGValidator.validate(cls.tasks)
+
+        # If tags is not empty then executing only tags tasks.
+        if len(tags) != 0:
+            cls.tasks = filter_tasks_on_the_basis_of_tags(cls.tasks.values(), set(tags))
 
         # Sorting tasks on the basis of priority.
-        tasks = sort_task_on_the_basis_of_priority(tasks.values())
+        cls.tasks = sort_task_on_the_basis_of_priority(cls.tasks.values())
 
         # The above sorted funs directly sending the list of values.
-        for task in tasks:
+        for task in cls.tasks.values():
             cls._execute_helper(task)
 
 
@@ -36,10 +40,10 @@ class TaskExecutor:
             return
 
         for dep_name in task.depends_on:
-            dep_task = Registry.get_task()[dep_name]
+            dep_task = cls.tasks[dep_name]
             cls._execute_helper(dep_task)
 
-        if any(Registry.get_task()[dep].state in [TaskStatus.FAILED, TaskStatus.SKIPPED] for dep in task.depends_on):
+        if any(cls.tasks[dep].state in [TaskStatus.FAILED, TaskStatus.SKIPPED] for dep in task.depends_on):
             task.state = TaskStatus.SKIPPED
             return
 
@@ -104,9 +108,9 @@ class TaskExecutor:
 
         ctx = ConditionContext(
             env=os.environ,
-            task_states={name: t.state for name, t in Registry.get_task().items()},
+            task_states={name: t.state for name, t in cls.tasks.items()},
             execution_context=cls.ExecutionContext,
-            task_errors={name: t.error for name, t in Registry.get_task().items()}
+            task_errors={name: t.error for name, t in cls.tasks.items()}
         )
 
         return bool(task.condition(ctx))

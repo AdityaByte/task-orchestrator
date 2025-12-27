@@ -11,7 +11,7 @@ from task_engine.enums.task_priority import TaskPriority
 
 class Task:
 
-    def __init__(self, name, depends_on=None, retries: RetryPolicy=None, condition=None, priority=TaskPriority.NORMAL):
+    def __init__(self, name, depends_on=None, retries: RetryPolicy=None, condition=None, priority=TaskPriority.NORMAL, tag=None):
         self.name = name
         self.depends_on = depends_on or []
         self.retries = retries
@@ -26,6 +26,7 @@ class Task:
             raise TypeError("Condition must be callable.")
         self.condition = condition
         self.priority = priority
+        self.tag = tag
 
     def __call__(self, original_function):
 
