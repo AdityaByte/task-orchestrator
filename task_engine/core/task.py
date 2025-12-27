@@ -6,10 +6,11 @@ task decorator.
 from functools import wraps
 from task_engine.core.registry import Registry
 from task_engine.enums.task_status import TaskStatus
+from task_engine.retry.policy import RetryPolicy
 
 class Task:
 
-    def __init__(self, name, depends_on=None, retries=None, condition=None):
+    def __init__(self, name, depends_on=None, retries: RetryPolicy=None, condition=None):
         self.name = name
         self.depends_on = depends_on or []
         self.retries = retries
