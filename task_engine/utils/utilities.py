@@ -1,6 +1,6 @@
 """This file contains helper functions."""
 from task_engine.core.task import Task
-from task_engine.exception.tag_not_found_error import TagNotFoundError
+from task_engine.exception.tag import TagNotFoundError
 
 def sort_task_on_the_basis_of_priority(tasks: list[Task], reverse=False) -> dict:
     """Returns a sorted task list on the basis of priority order and when reverse is true return in this order

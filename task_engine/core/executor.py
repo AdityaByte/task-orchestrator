@@ -8,6 +8,7 @@ from time import time, sleep
 import os
 from task_engine.core.task import ErrorInformation
 from task_engine.utils.utilities import sort_task_on_the_basis_of_priority, filter_tasks_on_the_basis_of_tags
+from task_engine.utils.dep_resolver import resolve_dependencies
 
 class TaskExecutor:
     """
@@ -17,13 +18,18 @@ class TaskExecutor:
     tasks: dict = {}
 
     @classmethod
-    def execute(cls, tags: tuple = ()):
+    def execute(cls, tags: tuple = (), taskgroup: tuple= ()):
         cls.tasks = Registry.get_task()
+
+        # Validating the dag graph.
         DAGValidator.validate(cls.tasks)
 
         # If tags is not empty then executing only tags tasks.
-        if len(tags) != 0:
+        if tags:
             cls.tasks = filter_tasks_on_the_basis_of_tags(cls.tasks.values(), set(tags))
+
+        if taskgroup:
+            cls.tasks = resolve_dependencies(taskgroup)
 
         # Sorting tasks on the basis of priority.
         cls.tasks = sort_task_on_the_basis_of_priority(cls.tasks.values())
@@ -115,24 +121,6 @@ class TaskExecutor:
 
         return bool(task.condition(ctx))
 
-
-    @classmethod
-    def dryrun(cls):
-
-        visited_task = set()
-        tasks = Registry.get_task()
-        for task in tasks:
-            cls._dryrun_helper(task, visited_task)
-
-    @classmethod
-    def _dryrun_helper(cls, task: Task, order_list: list, visited_task: set):
-        order_list = []
-        if any(task.name for task in visited_task):
-            return
-        visited_task.add(task.name)
-        order_list.append(task.name)
-        for dep_name in task.depends_on:
-            pass
 
 """
 task4, task1 -> task2->task3

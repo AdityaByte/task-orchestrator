@@ -14,6 +14,12 @@ Features
 - Task states tracking: ``PENDING``, ``SUCCESS``, ``FAILED``, ``SKIPPED``
 - Fail-fast error handling for dependent tasks
 - Lightweight and extensible for workflow automation
+- Conditional Task Execution on the basis of environment variables, previous task output and success failure of previous task.
+- Retry Policy
+- Task Output Sharing
+- Priority Based Task Execution
+- Tagging of tasks
+- Task Group Execution
 
 How It Works
 ------------
