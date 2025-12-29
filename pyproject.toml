@@ -1,5 +1,5 @@
 [project]
-name = "task-orchestrator"
+name = "task-engine"
 version = "0.1.0"
 description = "A lightweight Python task orchestration library for executing dependency-based workflows using a synchronous DAG executor"
 readme = "README.md"
@@ -19,3 +19,6 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+
+[project.scripts]
+task-engine = "task_engine.cli.main:main"
