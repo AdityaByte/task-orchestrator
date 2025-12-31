@@ -1,7 +1,7 @@
 from argparse import Namespace
 from task_engine.core.registry import Registry
 from task_engine.core.executor import TaskExecutor
-from task_engine.utils.report import analyze
+from task_engine.report.report import generate_report
 
 import importlib
 import importlib.util
@@ -32,7 +32,7 @@ def run(args: Namespace):
     )
 
     if args.report:
-        analyze()
+        generate_report(args.report)
 
 
 def _load_from_file(path: str):

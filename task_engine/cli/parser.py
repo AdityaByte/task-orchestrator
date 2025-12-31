@@ -29,7 +29,7 @@ def build_parser():
     # Execution modifiers.
     run_parser.add_argument(
         "--report",
-        help = "Generate execution report"
+        help = "File name without extension (e.g: task_report)"
     )
 
     run_parser.add_argument(

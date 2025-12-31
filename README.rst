@@ -20,6 +20,7 @@ Features
 - Priority Based Task Execution
 - Tagging of tasks
 - Task Group Execution
+- HTML Report Generation
 
 How It Works
 ------------
