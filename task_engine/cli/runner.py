@@ -35,7 +35,7 @@ def run(args: Namespace):
         generate_report(args.report)
 
 
-def _load_from_file(path: str):
+def _load_from_file(path: str) -> None:
     """Importing workflow file."""
     path = Path(path).resolve()
 
@@ -53,7 +53,7 @@ def _load_from_file(path: str):
     spec.loader.exec_module(module)
 
 
-def _load_from_module(module_path: str):
+def _load_from_module(module_path: str) -> None:
     """Importing the whole module."""
     try:
         importlib.import_module(module_path)

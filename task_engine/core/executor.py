@@ -12,13 +12,21 @@ from task_engine.utils.dep_resolver import resolve_dependencies
 
 class TaskExecutor:
     """
-    Don't need any instance for calling this method.
+    This class has all the methods for executing the task.
     """
     ExecutionContext: dict = {}
     tasks: dict = {}
 
     @classmethod
     def execute(cls, tags: tuple = (), taskgroup: tuple= ()):
+        """
+        Task is executed through this method.
+        Args:
+            tags (tuple): Tuple of tags.
+            taskgroup (tuple): Task group.
+        Returns:
+            None
+        """
         cls.tasks = Registry.get_task()
 
         # Validating the dag graph.

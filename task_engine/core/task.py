@@ -10,6 +10,17 @@ from task_engine.retry.policy import RetryPolicy
 from task_engine.enums.task_priority import TaskPriority
 
 class Task:
+    """
+    Represents a unit of work in the workflow engine.
+
+    Args:
+        name (str): Name of the task.
+        depends_on (list[str]): List of task dependencies.
+        retries (RetryPolicy): Takes the retry policy in which max retries and backoff function and retry_on can be defined.
+        condition (Lambda Function | Condition functions): Executing the task when the condition evaluated to True.
+        priority (TaskPriority): Priority of task.
+        tag (str): Tag to the task.
+    """
 
     def __init__(self, name, depends_on=None, retries: RetryPolicy=None, condition=None, priority=TaskPriority.NORMAL, tag=None):
         self.name = name
@@ -44,6 +55,13 @@ class Task:
         return wrapper
 
 class ErrorInformation:
+    """
+    If error came to a task this class holds all the data related to the error.
+    - Type of the error.
+    - Name of the error (eg: ValueError)
+    - Error message.
+    """
+
     def __init__(self, exception: Exception):
         self.exception = exception
         self.error_type = type(exception)
