@@ -1,6 +1,6 @@
 import argparse
 
-def build_parser():
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="Task Orchestrator",
         description="A workflow automation tool for automating tasks",
@@ -45,7 +45,7 @@ def build_parser():
     return parser
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     parser = build_parser()
     args = parser.parse_args()
 
