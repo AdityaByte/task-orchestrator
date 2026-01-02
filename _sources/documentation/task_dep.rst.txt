@@ -1,5 +1,5 @@
 Task Dependencies
-=================
+===================
 
 In many workflows, tasks depend on the results of other tasks.
 **Task Orchestrator** allows you to define dependencies easily
@@ -11,7 +11,7 @@ prevents errors caused by missing prerequisites.
 ---
 
 Defining Dependencies
---------------------
+-----------------------
 
 You can specify dependencies as a list of task names when
 defining a task:
@@ -33,7 +33,7 @@ defining a task:
        TaskExecutor.execute()
 
 Expected Output
----------------
+-----------------
 
 .. code-block:: text
 
@@ -43,7 +43,7 @@ Expected Output
 ---
 
 Notes
------
+-------
 
 - **Task registration order does not matter** when dependencies are defined.
 - The executor automatically determines the **correct execution order** based on the dependency graph.
