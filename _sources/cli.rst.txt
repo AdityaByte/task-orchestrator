@@ -1,5 +1,5 @@
 Command Line Utility
-====================
+========================
 
 Task Orchestrator provides a **command-line utility** that allows you to:
 
@@ -16,7 +16,7 @@ You can view available commands and flags using:
 ---
 
 Running a Task File
-------------------
+-----------------------
 
 To run a Python file containing tasks:
 
@@ -33,7 +33,7 @@ To run a Python file containing tasks:
 ---
 
 Running a Module
-----------------
+--------------------
 
 To run tasks defined inside a Python module:
 
@@ -48,7 +48,7 @@ To run tasks defined inside a Python module:
 ---
 
 Generating Reports
------------------
+--------------------
 
 You can generate an **HTML report** for your workflow execution:
 
@@ -63,7 +63,7 @@ You can generate an **HTML report** for your workflow execution:
 ---
 
 Notes
------
+-------
 
 - CLI execution respects **task dependencies, priorities, tags, and groups**.
 - You can combine **tags**, **task groups**, and **report generation** in a single command.

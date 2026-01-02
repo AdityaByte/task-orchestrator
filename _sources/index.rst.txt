@@ -1,5 +1,5 @@
 Task Orchestrator
-================
+===================
 
 Task Orchestrator is a **Python library** for defining and executing
 **dependency-aware workflows**. It enables developers to automate
@@ -8,7 +8,7 @@ handling execution order, failures, and task state management
 automatically.
 
 Features
---------
+----------
 
 - Define tasks using the ``@Task`` decorator
 - Automatic execution order based on task dependencies
@@ -23,7 +23,7 @@ Features
 - Automatic HTML report generation
 
 How It Works
-------------
+--------------
 
 You define Python functions as tasks using the ``@Task`` decorator.
 The engine automatically:
@@ -34,7 +34,7 @@ The engine automatically:
 4. Handles failures and optionally retries tasks based on configuration
 
 Example
--------
+---------
 
 Below is a minimal example demonstrating dependency-aware execution:
 
@@ -62,7 +62,7 @@ Below is a minimal example demonstrating dependency-aware execution:
    TaskExecutor.execute()
 
 Expected Output
----------------
+-----------------
 
 .. code-block:: text
 

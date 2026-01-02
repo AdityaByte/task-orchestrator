@@ -1,5 +1,5 @@
 Conditional-Based Task Execution
-================================
+====================================
 
 Task Orchestrator allows tasks to execute **conditionally** based on:
 
@@ -13,7 +13,7 @@ This provides fine-grained control over workflow execution.
 ---
 
 Executing Tasks Based on Previous Task Results
----------------------------------------------
+-------------------------------------------------
 
 You can trigger tasks based on the success or failure of other tasks:
 
@@ -41,7 +41,7 @@ You can trigger tasks based on the success or failure of other tasks:
        TaskExecutor.execute()
 
 Expected Output
----------------
+------------------
 
 .. code-block:: text
 
@@ -51,7 +51,7 @@ Expected Output
 ---
 
 Executing Tasks Based on Environment Variables
-----------------------------------------------
+------------------------------------------------
 
 Tasks can execute only if certain environment conditions are met:
 
@@ -71,7 +71,7 @@ Tasks can execute only if certain environment conditions are met:
 ---
 
 Executing Tasks Using User-Defined Conditions
----------------------------------------------
+------------------------------------------------
 
 You can pass a lambda function that receives the **execution context**:
 
@@ -87,7 +87,7 @@ You can pass a lambda function that receives the **execution context**:
    TaskExecutor.execute()
 
 Expected Output
----------------
+-----------------
 
 .. code-block:: text
 
@@ -96,7 +96,7 @@ Expected Output
 ---
 
 Executing Tasks on Exceptions
------------------------------
+--------------------------------
 
 Trigger tasks when specific exceptions occur in other tasks:
 
@@ -118,7 +118,7 @@ Trigger tasks when specific exceptions occur in other tasks:
    TaskExecutor.execute()
 
 Expected Output
----------------
+-----------------
 
 .. code-block:: text
 

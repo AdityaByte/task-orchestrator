@@ -1,5 +1,5 @@
 Task Priority
-=============
+===============
 
 Task Orchestrator allows you to assign **priority levels** to tasks.
 Tasks with higher priority are executed before tasks with lower priority.
@@ -8,7 +8,7 @@ You can also reverse the execution order if needed.
 ---
 
 Defining Task Priority
----------------------
+------------------------
 
 Use the ``priority`` parameter when defining a task:
 
@@ -34,7 +34,7 @@ Use the ``priority`` parameter when defining a task:
        TaskExecutor.execute()
 
 Expected Output
----------------
+------------------
 
 .. code-block:: text
 
@@ -45,7 +45,7 @@ Expected Output
 ---
 
 Notes
------
+-------
 
 - Default execution is **HIGH → NORMAL → LOW**.
 - The executor supports a **reverse flag** if you want to run low-priority tasks first.
