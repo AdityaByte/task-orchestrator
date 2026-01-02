@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Command Line Utility &#8212; task-orchestrator 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=01f34227"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Report Generation" href="documentation/report_gen.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="command-line-utility">
+<h1>Command Line Utility<a class="headerlink" href="#command-line-utility" title="Link to this heading">¶</a></h1>
+<p>Task Orchestrator provides a <strong>command-line utility</strong> that allows you to:</p>
+<ul class="simple">
+<li><p>Run task files or modules</p></li>
+<li><p>Execute tasks selectively by tag or task group</p></li>
+<li><p>Generate HTML reports for workflows</p></li>
+</ul>
+<p>You can view available commands and flags using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>task-engine<span class="w"> </span>-h
+</pre></div>
+</div>
+<p>—</p>
+<section id="running-a-task-file">
+<h2>Running a Task File<a class="headerlink" href="#running-a-task-file" title="Link to this heading">¶</a></h2>
+<p>To run a Python file containing tasks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>task-engine<span class="w"> </span>run<span class="w"> </span>--file<span class="w"> </span>filename.py<span class="w"> </span>--tags<span class="w"> </span>&lt;tag1,tag2&gt;<span class="w"> </span>--taskgroups<span class="w"> </span>&lt;group1,group2&gt;
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--file</span></code> : Path to the Python file containing tasks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--tags</span></code> : (Optional) Execute only tasks with the specified tags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--taskgroups</span></code> : (Optional) Execute only tasks in the specified task groups</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="running-a-module">
+<h2>Running a Module<a class="headerlink" href="#running-a-module" title="Link to this heading">¶</a></h2>
+<p>To run tasks defined inside a Python module:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>task-engine<span class="w"> </span>run<span class="w"> </span>--module<span class="w"> </span>aditya.module
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--module</span></code> : Module path containing tasks (e.g., <code class="docutils literal notranslate"><span class="pre">aditya.module</span></code>)</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="generating-reports">
+<h2>Generating Reports<a class="headerlink" href="#generating-reports" title="Link to this heading">¶</a></h2>
+<p>You can generate an <strong>HTML report</strong> for your workflow execution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>task-engine<span class="w"> </span>run<span class="w"> </span>--file<span class="w"> </span>my-workflow.py<span class="w"> </span>--report<span class="w"> </span>my-workflow
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--report</span></code> : Name of the workflow report to generate (the HTML file will be created under <code class="docutils literal notranslate"><span class="pre">./reports/</span></code>)</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>CLI execution respects <strong>task dependencies, priorities, tags, and groups</strong>.</p></li>
+<li><p>You can combine <strong>tags</strong>, <strong>task groups</strong>, and <strong>report generation</strong> in a single command.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">task-orchestrator</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="documentation/index.html">Documentation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Utility</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="documentation/report_gen.html" title="previous chapter">Report Generation</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Aditya Pawar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/cli.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

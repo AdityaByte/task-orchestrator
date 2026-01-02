@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Task Priority &#8212; task-orchestrator 0.1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=01f34227"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Task Tagging" href="task_tagging.html" />
+    <link rel="prev" title="Task Dependencies" href="task_dep.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="task-priority">
+<h1>Task Priority<a class="headerlink" href="#task-priority" title="Link to this heading">¶</a></h1>
+<p>Task Orchestrator allows you to assign <strong>priority levels</strong> to tasks.
+Tasks with higher priority are executed before tasks with lower priority.
+You can also reverse the execution order if needed.</p>
+<p>—</p>
+<section id="defining-task-priority">
+<h2>Defining Task Priority<a class="headerlink" href="#defining-task-priority" title="Link to this heading">¶</a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">priority</span></code> parameter when defining a task:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.enums.task_priority</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskPriority</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+
+<span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;task1&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">TaskPriority</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">task1</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task1 executed&quot;</span><span class="p">)</span>
+
+<span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;task2&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">TaskPriority</span><span class="o">.</span><span class="n">LOW</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">task2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task2 executed&quot;</span><span class="p">)</span>
+
+<span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;task3&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">TaskPriority</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">task3</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task3 executed&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">TaskExecutor</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-output">
+<h2>Expected Output<a class="headerlink" href="#expected-output" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Task1 executed
+Task3 executed
+Task2 executed
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Default execution is <strong>HIGH → NORMAL → LOW</strong>.</p></li>
+<li><p>The executor supports a <strong>reverse flag</strong> if you want to run low-priority tasks first.</p></li>
+<li><p>Priority is evaluated <strong>after dependency resolution</strong>, so tasks are still executed
+in an order that respects both <strong>dependencies</strong> and <strong>priority</strong>.</p></li>
+<li><p>Useful when multiple independent tasks exist, and some must run earlier.</p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">task-orchestrator</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command Line Utility</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Documentation</a><ul>
+      <li>Previous: <a href="task_dep.html" title="previous chapter">Task Dependencies</a></li>
+      <li>Next: <a href="task_tagging.html" title="next chapter">Task Tagging</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, Aditya Pawar.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/documentation/task_priority.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
