@@ -47,9 +47,9 @@
 <section id="executing-tasks-based-on-previous-task-results">
 <h2>Executing Tasks Based on Previous Task Results<a class="headerlink" href="#executing-tasks-based-on-previous-task-results" title="Link to this heading">¶</a></h2>
 <p>You can trigger tasks based on the success or failure of other tasks:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.context.condition.builders</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnFailure</span><span class="p">,</span> <span class="n">OnSuccess</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.context.condition.builders</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnFailure</span><span class="p">,</span> <span class="n">OnSuccess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">a</span><span class="p">():</span>
@@ -81,9 +81,9 @@ b executed
 <section id="executing-tasks-based-on-environment-variables">
 <h2>Executing Tasks Based on Environment Variables<a class="headerlink" href="#executing-tasks-based-on-environment-variables" title="Link to this heading">¶</a></h2>
 <p>Tasks can execute only if certain environment conditions are met:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.context.condition.builders</span><span class="w"> </span><span class="kn">import</span> <span class="n">Env</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.context.condition.builders</span><span class="w"> </span><span class="kn">import</span> <span class="n">Env</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="c1"># Execute this task only when environment is set to &quot;prod&quot;</span>
 <span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;deploy&quot;</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="n">Env</span><span class="p">(</span><span class="s2">&quot;prod&quot;</span><span class="p">))</span>
@@ -98,8 +98,8 @@ b executed
 <section id="executing-tasks-using-user-defined-conditions">
 <h2>Executing Tasks Using User-Defined Conditions<a class="headerlink" href="#executing-tasks-using-user-defined-conditions" title="Link to this heading">¶</a></h2>
 <p>You can pass a lambda function that receives the <strong>execution context</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;check_condition&quot;</span><span class="p">,</span> <span class="n">condition</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ctx</span><span class="p">:</span> <span class="mi">10</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">check_condition</span><span class="p">():</span>
@@ -119,9 +119,9 @@ b executed
 <section id="executing-tasks-on-exceptions">
 <h2>Executing Tasks on Exceptions<a class="headerlink" href="#executing-tasks-on-exceptions" title="Link to this heading">¶</a></h2>
 <p>Trigger tasks when specific exceptions occur in other tasks:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.context.condition.builders</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnExceptionType</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.context.condition.builders</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnExceptionType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">a</span><span class="p">():</span>

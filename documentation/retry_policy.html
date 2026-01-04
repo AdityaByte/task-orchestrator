@@ -42,7 +42,7 @@ the built-in <code class="docutils literal notranslate"><span class="pre">RetryP
 <ul class="simple">
 <li><p><strong>Max Retries</strong>: The maximum number of times a task should be retried.</p></li>
 <li><p><strong>Backoff</strong>: A function controlling the wait time between retries.
-The backoff functions are available in <code class="docutils literal notranslate"><span class="pre">task_engine.retry.backoff</span></code>.</p></li>
+The backoff functions are available in <code class="docutils literal notranslate"><span class="pre">pravaha.retry.backoff</span></code>.</p></li>
 <li><p><strong>retry_on</strong>: A tuple of exception types. The retry logic will only
 trigger if the task raises one of these exceptions.</p></li>
 </ul>
@@ -50,10 +50,10 @@ trigger if the task raises one of these exceptions.</p></li>
 without manual intervention.</p>
 <section id="example-usage">
 <h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.retry.policy</span><span class="w"> </span><span class="kn">import</span> <span class="n">RetryPolicy</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.retry.backoff</span><span class="w"> </span><span class="kn">import</span> <span class="n">fixed_delay</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.retry.policy</span><span class="w"> </span><span class="kn">import</span> <span class="n">RetryPolicy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.retry.backoff</span><span class="w"> </span><span class="kn">import</span> <span class="n">fixed_delay</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="c1"># Custom exception for demonstration</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConnectionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>

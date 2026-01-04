@@ -42,9 +42,9 @@ You can also reverse the execution order if needed.</p>
 <section id="defining-task-priority">
 <h2>Defining Task Priority<a class="headerlink" href="#defining-task-priority" title="Link to this heading">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">priority</span></code> parameter when defining a task:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.enums.task_priority</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskPriority</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.enums.task_priority</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskPriority</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;task1&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">TaskPriority</span><span class="o">.</span><span class="n">HIGH</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">task1</span><span class="p">():</span>

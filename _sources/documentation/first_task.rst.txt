@@ -21,8 +21,8 @@ execution context** using a mutable object.
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.core.executor import TaskExecutor
 
    # Shared execution context
    counter = {"value": 0}

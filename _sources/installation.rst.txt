@@ -7,7 +7,7 @@ Install using ``pip``:
 
 .. code-block:: console
 
-   pip install task-engine
+   pip install pravaha
 
 Verify Installation
 -------------------
@@ -16,7 +16,7 @@ After installation, you can verify it by importing the package in Python:
 
 .. code-block:: python
 
-   import task_engine
+   import pravaha
 
 If no error is raised, Task Orchestrator is installed successfully.
 
@@ -29,4 +29,4 @@ It is recommended to install Task Orchestrator inside a virtual environment:
 
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install task-engine
+   pip install pravaha

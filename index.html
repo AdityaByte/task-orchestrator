@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Task Orchestrator &#8212; task-orchestrator 0.1.0 documentation</title>
+    <title>Pravaha &#8212; task-orchestrator 0.1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
@@ -32,9 +32,9 @@
 
           <div class="body" role="main">
             
-  <section id="task-orchestrator">
-<h1>Task Orchestrator<a class="headerlink" href="#task-orchestrator" title="Link to this heading">¶</a></h1>
-<p>Task Orchestrator is a <strong>Python library</strong> for defining and executing
+  <section id="pravaha">
+<h1>Pravaha<a class="headerlink" href="#pravaha" title="Link to this heading">¶</a></h1>
+<p>Pravaha (a sanskrit word which means flow) is a <strong>Python library</strong> for defining and executing
 <strong>dependency-aware workflows</strong>. It enables developers to automate
 complex task pipelines declaratively using Python decorators, while
 handling execution order, failures, and task state management
@@ -69,8 +69,8 @@ The engine automatically:</p>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h2>
 <p>Below is a minimal example demonstrating dependency-aware execution:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;fetch_data&quot;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">fetch_data</span><span class="p">():</span>

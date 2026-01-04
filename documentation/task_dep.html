@@ -45,8 +45,8 @@ prevents errors caused by missing prerequisites.</p>
 <h2>Defining Dependencies<a class="headerlink" href="#defining-dependencies" title="Link to this heading">¶</a></h2>
 <p>You can specify dependencies as a list of task names when
 defining a task:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">task_engine.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
 <span class="nd">@Task</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;task1&quot;</span><span class="p">,</span> <span class="n">depends_on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;task2&quot;</span><span class="p">])</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">task1</span><span class="p">():</span>

@@ -2,7 +2,7 @@ Quickstart
 ==========
 
 This guide shows how to create and run your first workflow using
-**Task Orchestrator**.
+**Pravaha**.
 
 Create Your First Task
 ----------------------
@@ -12,8 +12,8 @@ function:
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.core.executor import TaskExecutor
 
    @Task(name="task1")
    def task1():

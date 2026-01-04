@@ -22,9 +22,9 @@ After executing a workflow, you can generate a report using the
 .. code-block:: python
 
    import time
-   from task_engine.core.task import Task
-   from task_engine.core.executor import TaskExecutor
-   from task_engine.report.report import generate_report
+   from pravaha.core.task import Task
+   from pravaha.core.executor import TaskExecutor
+   from pravaha.report.report import generate_report
 
    @Task(name="a")
    def task_a():
