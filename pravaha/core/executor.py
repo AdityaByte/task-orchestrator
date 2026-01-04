@@ -1,14 +1,14 @@
-from task_engine.core.registry import Registry
-from task_engine.core.task import Task
-from task_engine.enums.task_status import TaskStatus
-from task_engine.validation.dag import DAGValidator
-from task_engine.context.condition.context import ConditionContext
+from pravaha.core.registry import Registry
+from pravaha.core.task import Task
+from pravaha.enums.task_status import TaskStatus
+from pravaha.validation.dag import DAGValidator
+from pravaha.context.condition.context import ConditionContext
 from datetime import datetime
 from time import time, sleep
 import os
-from task_engine.core.task import ErrorInformation
-from task_engine.utils.utilities import sort_task_on_the_basis_of_priority, filter_tasks_on_the_basis_of_tags
-from task_engine.utils.dep_resolver import resolve_dependencies
+from pravaha.core.task import ErrorInformation
+from pravaha.utils.utilities import sort_task_on_the_basis_of_priority, filter_tasks_on_the_basis_of_tags
+from pravaha.utils.dep_resolver import resolve_dependencies
 
 class TaskExecutor:
     """

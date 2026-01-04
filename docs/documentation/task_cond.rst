@@ -19,9 +19,9 @@ You can trigger tasks based on the success or failure of other tasks:
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.context.condition.builders import OnFailure, OnSuccess
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.context.condition.builders import OnFailure, OnSuccess
+   from pravaha.core.executor import TaskExecutor
 
    @Task(name="a")
    def a():
@@ -57,9 +57,9 @@ Tasks can execute only if certain environment conditions are met:
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.context.condition.builders import Env
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.context.condition.builders import Env
+   from pravaha.core.executor import TaskExecutor
 
    # Execute this task only when environment is set to "prod"
    @Task(name="deploy", condition=Env("prod"))
@@ -77,8 +77,8 @@ You can pass a lambda function that receives the **execution context**:
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.core.executor import TaskExecutor
 
    @Task(name="check_condition", condition=lambda ctx: 10 > 9)
    def check_condition():
@@ -102,9 +102,9 @@ Trigger tasks when specific exceptions occur in other tasks:
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.context.condition.builders import OnExceptionType
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.context.condition.builders import OnExceptionType
+   from pravaha.core.executor import TaskExecutor
 
    @Task(name="a")
    def a():

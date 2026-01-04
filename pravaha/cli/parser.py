@@ -2,7 +2,7 @@ import argparse
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="Task Orchestrator",
+        prog="pravaha",
         description="A workflow automation tool for automating tasks",
         epilog="@Author: Aditya Pawar"
     )

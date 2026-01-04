@@ -1,22 +1,19 @@
-from task_engine.core.task import Task
-from task_engine.core.executor import TaskExecutor
-from task_engine.core.report import analyze
+from pravaha.core.task import Task
+from pravaha.core.executor import TaskExecutor
+from pravaha.report.report import generate_report
+import time
 
-@Task(name="another_func", depends_on=["logger"])
-def another_func():
-    print("what are you doing")
 
-@Task(name='logger', depends_on=["func"])
-def logger():
-    raise Exception("hello world")
-    print("Logger")
-
-@Task(name="func")
-def func():
+@Task(name="task1", depends_on=['task2'])
+def task1():
+    time.sleep(4)
     print("Hello world")
 
-task = Task(name="func")
+@Task("task2")
+def task2():
+    time.sleep(2)
+    print("Task2 executed")
+    raise ValueError("Value error raised.")
 
-if __name__ == "__main__":
-    TaskExecutor.execute()
-    analyze()
+TaskExecutor.execute()
+generate_report("my_workflow")

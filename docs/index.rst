@@ -1,7 +1,7 @@
-Task Orchestrator
+Pravaha
 ===================
 
-Task Orchestrator is a **Python library** for defining and executing
+Pravaha (a sanskrit word which means flow) is a **Python library** for defining and executing
 **dependency-aware workflows**. It enables developers to automate
 complex task pipelines declaratively using Python decorators, while
 handling execution order, failures, and task state management
@@ -40,8 +40,8 @@ Below is a minimal example demonstrating dependency-aware execution:
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.core.executor import TaskExecutor
 
    @Task(name="fetch_data")
    def fetch_data():

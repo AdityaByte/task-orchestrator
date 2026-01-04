@@ -1,4 +1,4 @@
-from task_engine.exception.validation import MissingDependencyError, CircularDependencyError
+from pravaha.exception.validation import MissingDependencyError, CircularDependencyError
 
 class DAGValidator:
 

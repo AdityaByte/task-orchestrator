@@ -1,6 +1,4 @@
-from task_engine.enums.task_status import TaskStatus
-from task_engine.core.registry import Registry
-import re
+from pravaha.enums.task_status import TaskStatus
 
 def OnSuccess(task_name: str):
     def _condition(ctx):

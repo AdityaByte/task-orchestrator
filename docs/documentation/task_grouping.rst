@@ -12,8 +12,8 @@ Example: Executing a Group of Tasks
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.core.executor import TaskExecutor
 
    @Task(name="a")
    def a():

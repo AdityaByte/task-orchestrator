@@ -1,8 +1,8 @@
 """
 This file tests Task initialization behavior.
 """
-from task_engine.core.task import Task
-from task_engine.enums.task_status import TaskStatus
+from pravaha.core.task import Task
+from pravaha.enums.task_status import TaskStatus
 
 def test_task_initializes_with_required_name():
     task = Task(name="demo_task")

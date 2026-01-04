@@ -1,5 +1,5 @@
 [project]
-name = "task-engine"
+name = "pravaha"
 version = "1.0.0"
 description = "A lightweight Python task orchestration library for executing dependency-based workflows using a synchronous DAG executor"
 readme = "README.rst"
@@ -21,4 +21,4 @@ testpaths = ["tests"]
 addopts = "-ra"
 
 [project.scripts]
-task-engine = "task_engine.cli.main:main"
+task-engine = "pravaha.cli.main:main"

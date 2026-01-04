@@ -4,10 +4,10 @@ tasks define with some properties.
 task decorator.
 """
 from functools import wraps
-from task_engine.core.registry import Registry
-from task_engine.enums.task_status import TaskStatus
-from task_engine.retry.policy import RetryPolicy
-from task_engine.enums.task_priority import TaskPriority
+from pravaha.core.registry import Registry
+from pravaha.enums.task_status import TaskStatus
+from pravaha.retry.policy import RetryPolicy
+from pravaha.enums.task_priority import TaskPriority
 
 class Task:
     """

@@ -1,7 +1,7 @@
 from argparse import Namespace
-from task_engine.core.registry import Registry
-from task_engine.core.executor import TaskExecutor
-from task_engine.report.report import generate_report
+from pravaha.core.registry import Registry
+from pravaha.core.executor import TaskExecutor
+from pravaha.report.report import generate_report
 
 import importlib
 import importlib.util

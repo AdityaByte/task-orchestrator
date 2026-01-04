@@ -14,9 +14,9 @@ Use the ``priority`` parameter when defining a task:
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.enums.task_priority import TaskPriority
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.enums.task_priority import TaskPriority
+   from pravaha.core.executor import TaskExecutor
 
    @Task(name="task1", priority=TaskPriority.HIGH)
    def task1():

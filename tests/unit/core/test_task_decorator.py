@@ -1,5 +1,5 @@
-from task_engine.core.task import Task
-from task_engine.core.registry import Registry
+from pravaha.core.task import Task
+from pravaha.core.registry import Registry
 
 def test_task_decorator_assigns_function_reference():
 

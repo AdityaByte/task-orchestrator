@@ -1,6 +1,6 @@
-from task_engine.core.registry import Registry
+from pravaha.core.registry import Registry
 from importlib.resources import files
-from task_engine.core.task import Task
+from pravaha.core.task import Task
 from datetime import datetime
 from pathlib import Path
 
@@ -57,7 +57,7 @@ def generate_report(workflow_name: str):
         overall_status[task.state.name] += 1
         total_duration += task.duration if task.duration else 0
 
-    template = files("task_engine.report").joinpath("template.html").read_text(
+    template = files("pravaha.report").joinpath("template.html").read_text(
         encoding="utf-8"
     )
 

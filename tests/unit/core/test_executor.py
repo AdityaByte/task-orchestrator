@@ -1,11 +1,11 @@
-from task_engine.core.executor import TaskExecutor
-from task_engine.core.task import Task
-from task_engine.core.registry import Registry
-from task_engine.enums.task_status import TaskStatus
-from task_engine.context.condition.builders import OnFailed
-from task_engine.retry.policy import RetryPolicy
-from task_engine.retry.backoff import fixed_delay
-from task_engine.enums.task_priority import TaskPriority
+from pravaha.core.executor import TaskExecutor
+from pravaha.core.task import Task
+from pravaha.core.registry import Registry
+from pravaha.enums.task_status import TaskStatus
+from pravaha.context.condition.builders import OnFailed
+from pravaha.retry.policy import RetryPolicy
+from pravaha.retry.backoff import fixed_delay
+from pravaha.enums.task_priority import TaskPriority
 
 def test_single_task_execution_success():
 

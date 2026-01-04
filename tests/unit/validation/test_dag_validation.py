@@ -1,7 +1,7 @@
-from task_engine.core.registry import Registry
-from task_engine.core.task import Task
-from task_engine.validation.dag import DAGValidator
-from task_engine.exception.validation import MissingDependencyError, CircularDependencyError
+from pravaha.core.registry import Registry
+from pravaha.core.task import Task
+from pravaha.validation.dag import DAGValidator
+from pravaha.exception.validation import MissingDependencyError, CircularDependencyError
 import pytest
 
 def test_valid_linear_dag():

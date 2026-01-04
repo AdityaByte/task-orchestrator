@@ -9,7 +9,7 @@ With ``RetryPolicy``, you can configure:
 
 - **Max Retries**: The maximum number of times a task should be retried.
 - **Backoff**: A function controlling the wait time between retries.
-  The backoff functions are available in ``task_engine.retry.backoff``.
+  The backoff functions are available in ``pravaha.retry.backoff``.
 - **retry_on**: A tuple of exception types. The retry logic will only
   trigger if the task raises one of these exceptions.
 
@@ -21,10 +21,10 @@ Example Usage
 
 .. code-block:: python
 
-   from task_engine.core.task import Task
-   from task_engine.retry.policy import RetryPolicy
-   from task_engine.retry.backoff import fixed_delay
-   from task_engine.core.executor import TaskExecutor
+   from pravaha.core.task import Task
+   from pravaha.retry.policy import RetryPolicy
+   from pravaha.retry.backoff import fixed_delay
+   from pravaha.core.executor import TaskExecutor
 
    # Custom exception for demonstration
    class ConnectionError(Exception):
