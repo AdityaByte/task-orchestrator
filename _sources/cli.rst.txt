@@ -11,7 +11,7 @@ You can view available commands and flags using:
 
 .. code-block:: bash
 
-   task-engine -h
+   pravaha -h
 
 ---
 
@@ -22,7 +22,7 @@ To run a Python file containing tasks:
 
 .. code-block:: bash
 
-   task-engine run --file filename.py --tags <tag1,tag2> --taskgroups <group1,group2>
+   pravaha run --file filename.py --tags <tag1,tag2> --taskgroups <group1,group2>
 
 **Parameters:**
 
@@ -39,7 +39,7 @@ To run tasks defined inside a Python module:
 
 .. code-block:: bash
 
-   task-engine run --module aditya.module
+   pravaha run --module aditya.module
 
 **Parameters:**
 
