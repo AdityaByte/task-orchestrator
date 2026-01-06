@@ -36,15 +36,55 @@
   <section id="task-dependencies">
 <h1>Task Dependencies<a class="headerlink" href="#task-dependencies" title="Link to this heading">¶</a></h1>
 <p>In many workflows, tasks depend on the results of other tasks.
-<strong>Task Orchestrator</strong> allows you to define dependencies easily
-using the <code class="docutils literal notranslate"><span class="pre">depends_on</span></code> attribute.</p>
-<p>This ensures that tasks are executed in the correct order and
-prevents errors caused by missing prerequisites.</p>
+<strong>Pravaha</strong> allows you to define task dependencies using the <code class="docutils literal notranslate"><span class="pre">depends_on</span></code> attribute.</p>
+<p>Defining dependencies ensures that tasks are executed in the correct order and
+prevents failures caused by missing prerequisites.</p>
 <p>—</p>
 <section id="defining-dependencies">
 <h2>Defining Dependencies<a class="headerlink" href="#defining-dependencies" title="Link to this heading">¶</a></h2>
-<p>You can specify dependencies as a list of task names when
-defining a task:</p>
+<p>Pravaha supports two types of dependencies:</p>
+<ol class="arabic simple">
+<li><p><strong>OR-based dependencies</strong></p></li>
+<li><p><strong>AND-based dependencies</strong></p></li>
+</ol>
+<p>—</p>
+</section>
+<section id="or-based-dependencies">
+<h2>OR-based Dependencies<a class="headerlink" href="#or-based-dependencies" title="Link to this heading">¶</a></h2>
+<p>An <strong>OR-based dependency</strong> means that a task will execute if <strong>at least one</strong>
+of its dependent tasks completes successfully.</p>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.dependency.dependency</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dependency</span>
+
+<span class="c1"># Dependency(type=&quot;OR | AND&quot;, dependencies=list[str])</span>
+<span class="nd">@Task</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">depends_on</span><span class="o">=</span><span class="n">Dependency</span><span class="p">(</span><span class="s2">&quot;OR&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">a</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+
+<span class="nd">@Task</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">b</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="nd">@Task</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">c</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="n">TaskExecutor</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
+</section>
+<section id="and-based-dependencies">
+<h2>AND-based Dependencies<a class="headerlink" href="#and-based-dependencies" title="Link to this heading">¶</a></h2>
+<p>An <strong>AND-based dependency</strong> means that a task will execute <strong>only if all</strong>
+of its dependent tasks complete successfully.</p>
+<p>AND-based dependencies can be defined in two ways.</p>
+<p>### 1. Implicit AND dependency using a list</p>
+<p>By default, passing a list to <code class="docutils literal notranslate"><span class="pre">depends_on</span></code> is treated as an <strong>AND dependency</strong>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
 
@@ -60,21 +100,46 @@ defining a task:</p>
     <span class="n">TaskExecutor</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 </pre></div>
 </div>
-</section>
 <section id="expected-output">
-<h2>Expected Output<a class="headerlink" href="#expected-output" title="Link to this heading">¶</a></h2>
+<h3>Expected Output<a class="headerlink" href="#expected-output" title="Link to this heading">¶</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Task2 executed
 Task1 executed
 </pre></div>
 </div>
 <p>—</p>
+<p>### 2. Explicit AND dependency using <code class="docutils literal notranslate"><span class="pre">Dependency</span></code></p>
+<p>You can also explicitly define an AND-based dependency using the <code class="docutils literal notranslate"><span class="pre">Dependency</span></code> object.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.core.executor</span><span class="w"> </span><span class="kn">import</span> <span class="n">TaskExecutor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pravaha.dependency.dependency</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dependency</span>
+
+<span class="c1"># Dependency(type=&quot;OR | AND&quot;, dependencies=list[str])</span>
+<span class="nd">@Task</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">depends_on</span><span class="o">=</span><span class="n">Dependency</span><span class="p">(</span><span class="s2">&quot;AND&quot;</span><span class="p">,</span> <span class="n">dependencies</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">a</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+
+<span class="nd">@Task</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">b</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="nd">@Task</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">c</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="n">TaskExecutor</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
 </section>
 <section id="notes">
 <h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><strong>Task registration order does not matter</strong> when dependencies are defined.</p></li>
-<li><p>The executor automatically determines the <strong>correct execution order</strong> based on the dependency graph.</p></li>
-<li><p>Circular dependencies will result in an error. Make sure your workflow graph is <strong>acyclic</strong>.</p></li>
+<li><p>The executor automatically determines the <strong>correct execution order</strong>
+based on the dependency graph.</p></li>
+<li><p>Circular dependencies are not allowed. Ensure that your workflow graph
+is <strong>acyclic (DAG)</strong>.</p></li>
 </ul>
 </section>
 </section>
