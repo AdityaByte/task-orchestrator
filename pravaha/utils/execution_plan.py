@@ -16,8 +16,8 @@ def dry_run():
 
     tasks = Registry.get_task()
     for task in tasks.values():
-        if task.depends_on is not None and task.depends_on != []:
-            final_output.append(f"{task.name} - depends on ({','.join(task.depends_on)})")
+        if task.depends_on is not None and task.depends_on.dependencies != []:
+            final_output.append(f"{task.name} - depends on ({','.join(task.depends_on.dependencies)}) with dependency-type: {task.depends_on.type}")
         else:
             final_output.append(f"{task.name} - no dependencies ")
 

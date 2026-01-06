@@ -3,12 +3,13 @@ from pravaha.core.task import Task
 from pravaha.enums.task_status import TaskStatus
 from pravaha.validation.dag import DAGValidator
 from pravaha.context.condition.context import ConditionContext
-from datetime import datetime
-from time import time, sleep
-import os
 from pravaha.core.task import ErrorInformation
 from pravaha.utils.utilities import sort_task_on_the_basis_of_priority, filter_tasks_on_the_basis_of_tags
 from pravaha.utils.dep_resolver import resolve_dependencies
+from pravaha.exception.task import InvalidDependencyType
+from datetime import datetime
+from time import time, sleep
+import os
 
 class TaskExecutor:
     """
@@ -53,11 +54,27 @@ class TaskExecutor:
         if task.state in [TaskStatus.SUCCESS, TaskStatus.FAILED, TaskStatus.SKIPPED]:
             return
 
-        for dep_name in task.depends_on:
-            dep_task = cls.tasks[dep_name]
-            cls._execute_helper(dep_task)
+        dep_type = task.depends_on.type
 
-        if any(cls.tasks[dep].state in [TaskStatus.FAILED, TaskStatus.SKIPPED] for dep in task.depends_on):
+        if dep_type not in ['AND', 'OR', ""]:
+            raise InvalidDependencyType(f"Invalid dependency type: {dep_type} with task: {task.name}")
+
+        for dep_name in task.depends_on.dependencies:
+            dep_task  = cls.tasks[dep_name]
+            cls._execute_helper(dep_task)
+            if dep_type == "OR" and dep_task.state == TaskStatus.SUCCESS:
+                break
+
+        can_we_proceed = True
+
+        if dep_type == "OR":
+            if not any(cls.tasks[dep].state == TaskStatus.SUCCESS for dep in task.depends_on.dependencies):
+                can_we_proceed = False
+        elif dep_type == "AND":
+            if any(cls.tasks[dep].state in [TaskStatus.FAILED, TaskStatus.SKIPPED] for dep in task.depends_on.dependencies):
+                can_we_proceed = False
+
+        if not can_we_proceed:
             task.state = TaskStatus.SKIPPED
             return
 
@@ -68,7 +85,17 @@ class TaskExecutor:
             return
 
         # Preparing inputs for dependency outputs.
-        inputs = [cls.ExecutionContext.get(dep_name) for dep_name in task.depends_on]
+
+        inputs = []
+
+        if dep_type == "OR":
+            for dep_name in task.depends_on.dependencies:
+                dep_task = cls.tasks[dep_name]
+                if dep_task.state == TaskStatus.SUCCESS:
+                    inputs.append(cls.ExecutionContext.get(dep_name))
+
+        else:
+            inputs = [cls.ExecutionContext.get(dep_name) for dep_name in task.depends_on.dependencies]
 
         # Executing task along with checking for retry.
         # Implementing retry logic.

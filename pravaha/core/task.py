@@ -8,6 +8,8 @@ from pravaha.core.registry import Registry
 from pravaha.enums.task_status import TaskStatus
 from pravaha.retry.policy import RetryPolicy
 from pravaha.enums.task_priority import TaskPriority
+from pravaha.dependency.dependency import Dependency
+from typing import Union, List, Optional
 
 class Task:
     """
@@ -22,9 +24,8 @@ class Task:
         tag (str): Tag to the task.
     """
 
-    def __init__(self, name, depends_on=None, retries: RetryPolicy=None, condition=None, priority=TaskPriority.NORMAL, tag=None):
+    def __init__(self, name, depends_on: Optional[Union[Dependency, List[str]]] = None, retries: Optional[RetryPolicy]=None, condition=None, priority=TaskPriority.NORMAL, tag=None):
         self.name = name
-        self.depends_on = depends_on or []
         self.retries = retries
         self.function_ref = None
         self.state = TaskStatus.PENDING # Default state
@@ -38,6 +39,19 @@ class Task:
         self.condition = condition
         self.priority = priority
         self.tag = tag
+        self.depends_on = self._normalize_dependency(depends_on)
+
+    @staticmethod
+    def _normalize_dependency(depends_on: Optional[Union[Dependency, List[str]]]) -> Dependency:
+
+        if depends_on is None:
+            return Dependency()
+        elif isinstance(depends_on, Dependency):
+            return depends_on
+        elif isinstance(depends_on, list):
+            return Dependency("AND", depends_on)
+        else:
+            raise TypeError(f"depends_on must be dependency or List[str]")
 
     def __call__(self, original_function):
 

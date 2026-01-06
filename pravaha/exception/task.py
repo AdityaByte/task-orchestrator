@@ -3,3 +3,6 @@ class TaskFailedError(Exception):
 
 class TaskNotFoundError(Exception):
     pass
+
+class InvalidDependencyType(Exception):
+    pass

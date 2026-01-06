@@ -9,7 +9,8 @@ Features
 --------
 
 - Define tasks using the ``@Task`` decorator
-- Automatic execution order based on task dependencies
+- Automatically resolves task execution order based on defined dependencies
+- Supports both OR and AND dependency types
 - Built-in logging and execution context for task outputs
 - Task states tracking: ``PENDING``, ``SUCCESS``, ``FAILED``, ``SKIPPED``
 - Fail-fast error handling for dependent tasks

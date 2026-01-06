@@ -9,7 +9,7 @@ class DAGValidator:
 
         # Missing dependency check.
         for task in tasks.values():
-            for dep in task.depends_on:
+            for dep in task.depends_on.dependencies:
                 if dep not in tasks:
                     raise MissingDependencyError(f"Task '{task.name}' depends on missing task '{dep}'")
 
@@ -19,7 +19,7 @@ class DAGValidator:
             path_visited.add(task_name)
             path.append(task_name)
 
-            for dep in tasks[task_name].depends_on:
+            for dep in tasks[task_name].depends_on.dependencies:
                 if dep not in visited:
                     dfs(dep, path)
                 elif dep in path_visited:
