@@ -41,7 +41,7 @@ def resolve_dependencies(selected_tasks: tuple[str]) -> dict[str, Task]:
         visited.add(task_name)
         task: Task = registry[task_name]
 
-        for dep_name in task.depends_on:
+        for dep_name in task.depends_on.dependencies:
             dfs(dep_name)
 
         resolved[task_name] = task # Adding resolved task to dictionary.

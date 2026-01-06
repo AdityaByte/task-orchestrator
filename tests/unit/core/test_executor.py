@@ -6,6 +6,9 @@ from pravaha.context.condition.builders import OnFailed
 from pravaha.retry.policy import RetryPolicy
 from pravaha.retry.backoff import fixed_delay
 from pravaha.enums.task_priority import TaskPriority
+from pravaha.dependency.dependency import Dependency
+from pravaha.exception.task import InvalidDependencyType
+import pytest
 
 def test_single_task_execution_success():
 
@@ -180,3 +183,16 @@ def test_priority_execution_order():
     TaskExecutor.execute()
 
     assert execution_order == ['task1', 'task3', 'task2']
+
+def test_executor_raises_error_on_invalid_dependency_type():
+
+    @Task("a", depends_on=Dependency("INVALID", ['b']))
+    def a():
+        pass
+
+    @Task("b")
+    def b():
+        pass
+
+    with pytest.raises(InvalidDependencyType):
+        TaskExecutor.execute()
